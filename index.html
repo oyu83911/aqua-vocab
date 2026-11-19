@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf7ff">
+<meta name="description" content="英検準1級のための、自分専用のかわいい単語学習アプリ">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Aqua Vocab ♡</title>
+<style>
+:root{--ink:#347fae;--muted:#78a9c8;--blue:#58b6e5;--pale:#eaf7ff;--line:#d7edf9;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#e8f7ff,#f8fcff 55%,#e7f5ff);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif;color:var(--ink);min-height:100vh}
+button,input{font:inherit}button{border:0;cursor:pointer}.app{max-width:560px;margin:auto;padding:22px 16px calc(30px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;margin:5px 2px 20px}.brand{font-size:27px;font-weight:850;letter-spacing:-1px;color:#398fc6}.subtitle{font-size:10px;letter-spacing:2px;color:#80b1cf}.sparkle{font-size:28px;color:#73c6ec}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}.stat,.panel{background:#ffffffdf;border:1px solid #fff;border-radius:19px;box-shadow:0 8px 25px #8bc8e51a}.stat{text-align:center;padding:12px 5px}.stat strong{display:block;font-size:23px;color:#398fc6}.stat span{font-size:11px;color:var(--muted)}
+.tabs{display:flex;gap:6px;padding:5px;background:#dff2fc;border-radius:16px;margin-bottom:14px}.tabs button{flex:1;padding:11px 5px;background:transparent;border-radius:12px;color:#6099bc;font-weight:700;font-size:13px}.tabs button.active{background:white;color:#328cc4;box-shadow:0 3px 10px #6caed01c}
+.panel{padding:18px}.topline{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.7px;margin-bottom:14px}
+.card{background:linear-gradient(145deg,#effaff,#e3f4ff);border-radius:19px;min-height:220px;padding:25px 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;cursor:pointer;transition:transform .2s}.card:active{transform:scale(.985)}.hint{font-size:11px;color:#75b5d9;letter-spacing:1px}.word{font-size:35px;font-weight:850;color:#328cc4;overflow-wrap:anywhere}.pos{font-size:12px;color:#7ba9c6}.meaning{font-size:22px;font-weight:750;color:#328cc4}.visual{width:100%;max-width:220px;min-height:116px;margin:2px auto 0;padding:10px;border-radius:18px;background:linear-gradient(145deg,#fff,#e5f6ff);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px #d7edf9}.visual svg{width:100%;height:112px;overflow:visible}.visual-caption{font-size:11px;color:#75a9c9;letter-spacing:.3px}.example{font-size:14px;color:#468ab6;line-height:1.5}.translation{font-size:12px;color:#78a9c8}
+.btnrow{display:flex;gap:9px;margin-top:14px}.btn{flex:1;padding:13px 12px;border-radius:14px;background:#e4f4fc;color:#398fc6;font-weight:750}.btn.primary{background:linear-gradient(100deg,#7bc9ed,#54afe0);color:white;box-shadow:0 5px 13px #61b6e233}.btn:disabled{opacity:.35;cursor:default}
+.sortbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 14px;font-size:11px;color:var(--muted)}.sortbar button{padding:8px 10px;border-radius:11px;background:#edf8fe;color:#619cbe;font-size:11px;font-weight:700}.sortbar button.selected{background:#78c7eb;color:white;box-shadow:0 3px 9px #61b6e233}.inputlabel{display:block;font-size:13px;font-weight:700;margin:17px 0 8px}.answer{width:100%;border:1.5px solid #d7edf9;border-radius:13px;padding:14px;background:#fbfeff;color:#347fae;outline:none}.answer:focus{border-color:#78c5e9;box-shadow:0 0 0 3px #bde8fa66}
+.feedback{padding:13px;border-radius:13px;margin-top:12px;font-size:14px;line-height:1.6}.good{background:#e7f8f1;color:#298668}.bad{background:#fff0f2;color:#ad6070}.note{background:#eff8fd;border-radius:13px;padding:12px;margin-top:12px;font-size:13px;line-height:1.6}
+.review-item{background:#eff8fd;border-radius:13px;padding:13px;margin-top:9px;display:flex;justify-content:space-between;gap:10px;align-items:center}.review-item strong{display:block}.review-item small{color:var(--muted)}.review-item button{background:white;color:#398fc6;border-radius:10px;padding:8px 10px}
+.empty{text-align:center;padding:30px 12px;color:#79a9c7}.footer{text-align:center;color:#8ab5ce;font-size:11px;margin:18px 0 0}
+@media(min-width:520px){.app{padding-top:35px}.word{font-size:40px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div><div class="brand">Aqua Vocab ♡</div><div class="subtitle">EIKEN PRE-1 WORD TRAINER</div></div><div class="sparkle">✧</div></header>
+<section class="stats">
+ <div class="stat"><strong id="knownCount">0</strong><span>覚えた単語</span></div>
+ <div class="stat"><strong id="missedCount">0</strong><span>苦手単語</span></div>
+ <div class="stat"><strong id="studiedCount">0</strong><span>学習した単語</span></div>
+</section>
+<nav class="tabs" aria-label="学習モード">
+ <button class="active" data-mode="cards">📖 単語帳</button><button data-mode="quiz">✏️ テスト</button><button data-mode="review">♡ 復習</button>
+</nav>
+<section id="content" class="panel"></section>
+<p class="footer">Made with ♡ for your English journey · 学習記録はこの端末に保存</p>
+</main>
+<script>
+const words=[
+ {en:"alleviate",pos:"動詞",ja:"和らげる、軽減する",syn:["和らげる","軽減する","緩和する","苦痛を減らす","負担を減らす"],ex:"The medicine helped alleviate the pain.",tr:"その薬は痛みを和らげるのに役立った。"},
+ {en:"inevitable",pos:"形容詞",ja:"避けられない、必然的な",syn:["避けられない","必然的な","不可避の","免れない"],ex:"Change is inevitable.",tr:"変化は避けられない。"},
+ {en:"substantial",pos:"形容詞",ja:"かなりの、相当な、実質的な",syn:["かなりの","相当な","実質的な","大幅な"],ex:"The project requires substantial investment.",tr:"その計画にはかなりの投資が必要だ。"},
+ {en:"deteriorate",pos:"動詞",ja:"悪化する、低下する",syn:["悪化する","低下する","劣化する","悪くなる"],ex:"The situation began to deteriorate.",tr:"状況は悪化し始めた。"},
+ {en:"profound",pos:"形容詞",ja:"深い、重大な、深遠な",syn:["深い","重大な","深遠な","大きな影響を与える"],ex:"The discovery had a profound impact.",tr:"その発見は大きな影響を与えた。"},
+ {en:"obstacle",pos:"名詞",ja:"障害、妨げ",syn:["障害","妨げ","障壁","困難"],ex:"Lack of funding is a major obstacle.",tr:"資金不足は大きな障害だ。"},
+ {en:"consecutive",pos:"形容詞",ja:"連続した、連続的な",syn:["連続した","連続的な","立て続けの"],ex:"It rained for three consecutive days.",tr:"雨は3日連続で降った。"},
+ {en:"reluctant",pos:"形容詞",ja:"気が進まない、渋々の",syn:["気が進まない","渋々の","乗り気でない","嫌がる"],ex:"She was reluctant to admit her mistake.",tr:"彼女は自分の間違いを認めたがらなかった。"},
+ {en:"controversial",pos:"形容詞",ja:"論争を呼ぶ、物議を醸す",syn:["論争を呼ぶ","物議を醸す","議論の的となる"],ex:"The proposal remains controversial.",tr:"その提案は依然として議論を呼んでいる。"},
+ {en:"implement",pos:"動詞",ja:"実行する、実施する",syn:["実行する","実施する","導入する","履行する"],ex:"The government plans to implement new policies.",tr:"政府は新しい政策を実施する予定だ。"}
+];
+const $=s=>document.querySelector(s);
+let mode="cards",index=0,flipped=false,answer="",feedback=null;
+let sortMode="freq", order=[];
+const frequencyOrder=[1,2,9,5,7,8,0,3,4,6]; // このサンプル10語の学習優先度の目安
+function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
+function applySort(mode){sortMode=mode;order=mode==="random"?shuffle(words.map((_,i)=>i)):mode==="abc"?words.map((_,i)=>i).sort((a,b)=>words[a].en.localeCompare(words[b].en)): [...frequencyOrder];index=0;flipped=false;answer="";feedback=null;render()}
+function currentIndex(){return order[index]??0}
+let state={known:[],missed:[],studied:[]};
+try{state={...state,...JSON.parse(localStorage.getItem("aqua-vocab-progress")||"{}")}}catch(e){}
+function save(){localStorage.setItem("aqua-vocab-progress",JSON.stringify(state));renderStats()}
+function renderStats(){$("#knownCount").textContent=state.known.length;$("#missedCount").textContent=state.missed.length;$("#studiedCount").textContent=state.studied.length}
+function setMode(m){mode=m;document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));render()}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
+function current(){return words[currentIndex()]}
+function sortHTML(){return `<div class="sortbar"><span>並び順</span><button data-sort="freq" class="${sortMode==='freq'?'selected':''}">⭐ 頻出・重要度</button><button data-sort="random" class="${sortMode==='random'?'selected':''}">🔀 ランダム</button><button data-sort="abc" class="${sortMode==='abc'?'selected':''}">ABC順</button></div>`}
+function visualHTML(w){
+ const art={
+  alleviate:`<path d="M42 73h56M70 45v56"/><path d="M54 54l32 32M86 54L54 86"/><path d="M112 40c12 9 18 19 18 30a18 18 0 0 1-36 0c0-11 7-21 18-30Z"/><path d="M145 54l7 7 14-17"/>`,
+  inevitable:`<circle cx="76" cy="65" r="31"/><path d="M76 44v23l15 9M119 65h38m-10-10 10 10-10 10"/><path d="M54 27l-5-8m54 8 5-8"/>`,
+  substantial:`<path d="M43 98V72h22v26M78 98V53h22v45M113 98V32h22v66"/><path d="M39 101h105M149 42l9-10 9 10"/>`,
+  deteriorate:`<path d="M88 96V62m0 12L65 52m23 31 24-25"/><path d="M65 52c-2-17-19-20-27-12 1 15 12 23 27 12Zm23 11c1-17 18-21 27-12-1 15-12 24-27 12Z"/><path d="M47 98h82M52 109h72"/><path d="m130 33 9 9-9 9"/>`,
+  profound:`<path d="M37 42c18-17 37-17 55 0s37 17 55 0"/><path d="M37 63c18-17 37-17 55 0s37 17 55 0"/><path d="M37 84c18-17 37-17 55 0s37 17 55 0"/><path d="M92 29v73m-9-9 9 9 9-9"/>`,
+  obstacle:`<path d="M39 96V57h27v39m0-27h27v27m0-39h27v39"/><path d="M30 105h105M147 80l13-13 13 13m-13-13v38"/>`,
+  consecutive:`<rect x="45" y="35" width="94" height="67" rx="9"/><path d="M45 53h94M67 26v18m50-18v18"/><path d="M62 68h9m12 0h9m12 0h9m-49 17h9m12 0h9m12 0h9"/>`,
+  reluctant:`<circle cx="86" cy="47" r="17"/><path d="M55 101c3-22 15-33 31-33s28 11 31 33"/><path d="M126 42h30m-8-8 8 8-8 8M43 35l-10-7m10 7-10 7"/>`,
+  controversial:`<path d="M38 39h67a9 9 0 0 1 9 9v24a9 9 0 0 1-9 9H69l-16 12v-12h-6a9 9 0 0 1-9-9V48a9 9 0 0 1 9-9Z"/><path d="M93 63h49a9 9 0 0 1 9 9v19a9 9 0 0 1-9 9h-7v10l-14-10H93"/><path d="M57 57h29m-29 12h19m29 8h29"/>`,
+  implement:`<circle cx="88" cy="68" r="29"/><circle cx="88" cy="68" r="10"/><path d="M88 29v12m0 54v12M49 68h12m54 0h12M60 40l9 9m38 38 9 9m0-56-9 9M69 87l-9 9"/><path d="m78 68 7 7 15-17"/>`
+ };
+ const labels={alleviate:'痛み・負担が軽くなる',inevitable:'避けられず起こる',substantial:'量や規模がかなり大きい',deteriorate:'状態が悪くなる',profound:'深く、大きな影響',obstacle:'進むのをさえぎる壁',consecutive:'途切れず連続する',reluctant:'気が進まずためらう',controversial:'賛否が分かれて議論になる',implement:'計画を実行に移す'};
+ return `<div class="visual" role="img" aria-label="${labels[w.en]}"><svg viewBox="0 0 190 125" fill="none" stroke="#58aeda" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="95" cy="63" r="57" stroke="#c5eafa" stroke-width="2" stroke-dasharray="4 7"/>${art[w.en]||''}<circle cx="153" cy="24" r="4" fill="#9bdcf5" stroke="none"/><path d="M29 104l4-4m0 4-4-4" stroke="#9bdcf5" stroke-width="3"/></svg></div><div class="visual-caption">✧ ${labels[w.en]} ✧</div>`;
+}
+function cardHTML(){let w=current();return `${sortHTML()}<div class="topline"><span>WORD CARD</span><span>${index+1} / ${order.length}</span></div><div class="card" id="flipCard" role="button" tabindex="0" aria-label="単語カードをめくる">${flipped?`<span class="hint">MEANING ♡</span><div class="meaning">${w.ja}</div>${visualHTML(w)}<div class="pos">${w.en}</div><div class="example">${w.ex}</div><div class="translation">${w.tr}</div>`:`<span class="hint">TAP TO FLIP ✧</span><div class="word">${w.en}</div><div class="pos">${w.pos}</div><span class="hint">タップして意味を確認</span>`}</div><div class="btnrow"><button class="btn" id="prev" ${index===0?"disabled":""}>前へ</button><button class="btn primary" id="flip">${flipped?"表に戻す ↻":"カードをめくる ♡"}</button><button class="btn" id="next">次へ →</button></div>`}
+function quizHTML(){let w=current();return `${sortHTML()}<div class="topline"><span>WRITE THE MEANING ✎</span><span>${index+1} / ${order.length}</span></div><div class="card" style="min-height:150px;cursor:default"><div class="word">${w.en}</div><div class="pos">${w.pos}</div></div><label class="inputlabel" for="answer">この単語の意味を日本語で入力！</label><input id="answer" class="answer" placeholder="意味を入力してね..." autocomplete="off" value="${escapeHTML(answer)}"><div class="btnrow"><button class="btn primary" id="check" ${feedback?"disabled":""}>答え合わせ ♡</button></div>${feedback?`<div class="feedback ${feedback.ok?"good":"bad"}"><strong>${feedback.ok?"○ 正解！！":"× 不正解"}</strong><br>${feedback.ok?"いい感じ！意味を覚えられてるね。":"正しい意味を確認しよう！"}<br><b>${w.ja}</b>${visualHTML(w)}</div><div class="note"><b>例文</b><br>${w.ex}<br><span class="translation">${w.tr}</span></div><div class="btnrow"><button class="btn primary" id="nextQuiz">次の問題へ →</button></div>`:""}`}
+function reviewHTML(){if(!state.missed.length)return `<div class="empty"><div style="font-size:35px">✧</div><b>まだ苦手単語はないよ！</b><br><small>テストに挑戦してみよう。</small></div>`;return `<div class="topline"><span>♡ REVIEW WORDS</span><span>${state.missed.length} WORDS</span></div>`+state.missed.map(i=>`<div class="review-item"><div><strong>${words[i].en}</strong><small>${words[i].ja}</small></div><button data-review="${i}">復習する →</button></div>`).join("")}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){renderStats();$("#content").innerHTML=mode==="cards"?cardHTML():mode==="quiz"?quizHTML():reviewHTML();
+ document.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>applySort(b.dataset.sort));
+ if(mode==="cards"){$("#flipCard").onclick=()=>{flipped=!flipped;render()};$("#flipCard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flipped=!flipped;render()}};$("#flip").onclick=()=>{flipped=!flipped;render()};$("#prev").onclick=()=>{if(index>0){index--;flipped=false;render()}};$("#next").onclick=next}
+ if(mode==="quiz"){$("#answer")?.addEventListener("input",e=>answer=e.target.value);$("#check")?.addEventListener("click",check);$("#nextQuiz")?.addEventListener("click",next)}
+ if(mode==="review")document.querySelectorAll("[data-review]").forEach(b=>b.onclick=()=>{const id=Number(b.dataset.review);index=order.indexOf(id);if(index<0){applySort("freq");index=order.indexOf(id)}setMode("cards")})
+}
+function check(){let w=current(),wordId=currentIndex(),a=answer.trim().replace(/\s/g,"");if(!a){$("#answer").focus();return}let normalized=a.replace(/[。、！!？?]/g,"");let ok=w.syn.some(s=>normalized.includes(s.replace(/\s/g,""))||s.replace(/\s/g,"").includes(normalized));feedback={ok};if(!state.studied.includes(wordId))state.studied.push(wordId);if(ok){if(!state.known.includes(wordId))state.known.push(wordId);state.missed=state.missed.filter(i=>i!==wordId)}else if(!state.missed.includes(wordId))state.missed.push(wordId);save();render()}
+function next(){index=(index+1)%order.length;flipped=false;answer="";feedback=null;render()}
+applySort("freq");
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>

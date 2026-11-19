@@ -1,0 +1,14 @@
+{
+  "name": "Aqua Vocab",
+  "short_name": "Aqua Vocab",
+  "description": "英検準1級のための自分専用単語学習アプリ",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eaf7ff",
+  "theme_color": "#eaf7ff",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
