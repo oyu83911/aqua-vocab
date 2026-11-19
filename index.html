@@ -156,7 +156,7 @@ function renderStats(){$("#knownCount").textContent=state.known.length;$("#misse
 function setMode(m){mode=m;document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));render()}
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
 function current(){return words[currentIndex()]}
-function sortHTML(){return `<div class="sortbar"><span>並び順</span><button data-sort="freq" class="${sortMode==='freq'?'selected':''}">⭐ 頻出・重要度</button><button data-sort="random" class="${sortMode==='random'?'selected':''}">🔀 ランダム</button><button data-sort="abc" class="${sortMode==='abc'?'selected':''}">ABC順</button></div>`}
+function sortHTML(){return `<div class="sortbar"><span>並び順</span><button data-sort="freq" class="${sortMode==='freq'?'selected':''}">⭐ 優先順</button><button data-sort="random" class="${sortMode==='random'?'selected':''}">🔀 ランダム</button><button data-sort="abc" class="${sortMode==='abc'?'selected':''}">ABC順</button></div><div class="sortbar"><span>レベル</span><button data-level="all" class="${levelFilter==='all'?'selected':''}">すべて</button><button data-level="1" class="${levelFilter==='1'?'selected':''}">① 最重要</button><button data-level="2" class="${levelFilter==='2'?'selected':''}">② 頻出</button><button data-level="3" class="${levelFilter==='3'?'selected':''}">③ 標準</button><button data-level="4" class="${levelFilter==='4'?'selected':''}">④ 発展</button></div>`}
 function visualHTML(w){
  const art={
   alleviate:`<path d="M42 73h56M70 45v56"/><path d="M54 54l32 32M86 54L54 86"/><path d="M112 40c12 9 18 19 18 30a18 18 0 0 1-36 0c0-11 7-21 18-30Z"/><path d="M145 54l7 7 14-17"/>`,
@@ -179,6 +179,7 @@ function reviewHTML(){if(!state.missed.length)return `<div class="empty"><div st
 function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){renderStats();$("#content").innerHTML=mode==="cards"?cardHTML():mode==="quiz"?quizHTML():reviewHTML();
  document.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>applySort(b.dataset.sort));
+ document.querySelectorAll("[data-level]").forEach(b=>b.onclick=()=>{levelFilter=b.dataset.level;applySort(sortMode)});
  if(mode==="cards"){$("#flipCard").onclick=()=>{flipped=!flipped;render()};$("#flipCard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flipped=!flipped;render()}};$("#flip").onclick=()=>{flipped=!flipped;render()};$("#prev").onclick=()=>{if(index>0){index--;flipped=false;render()}};$("#next").onclick=next}
  if(mode==="quiz"){$("#answer")?.addEventListener("input",e=>answer=e.target.value);$("#check")?.addEventListener("click",check);$("#nextQuiz")?.addEventListener("click",next)}
  if(mode==="review")document.querySelectorAll("[data-review]").forEach(b=>b.onclick=()=>{const id=Number(b.dataset.review);index=order.indexOf(id);if(index<0){applySort("freq");index=order.indexOf(id)}setMode("cards")})
