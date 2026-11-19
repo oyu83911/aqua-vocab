@@ -41,16 +41,16 @@ header{display:flex;justify-content:space-between;align-items:center;margin:5px 
 </main>
 <script>
 const words=[
- {en:"alleviate",pos:"動詞",ja:"和らげる、軽減する",syn:["和らげる","軽減する","緩和する","苦痛を減らす","負担を減らす"],ex:"The medicine helped alleviate the pain.",tr:"その薬は痛みを和らげるのに役立った。"},
- {en:"inevitable",pos:"形容詞",ja:"避けられない、必然的な",syn:["避けられない","必然的な","不可避の","免れない"],ex:"Change is inevitable.",tr:"変化は避けられない。"},
- {en:"substantial",pos:"形容詞",ja:"かなりの、相当な、実質的な",syn:["かなりの","相当な","実質的な","大幅な"],ex:"The project requires substantial investment.",tr:"その計画にはかなりの投資が必要だ。"},
- {en:"deteriorate",pos:"動詞",ja:"悪化する、低下する",syn:["悪化する","低下する","劣化する","悪くなる"],ex:"The situation began to deteriorate.",tr:"状況は悪化し始めた。"},
- {en:"profound",pos:"形容詞",ja:"深い、重大な、深遠な",syn:["深い","重大な","深遠な","大きな影響を与える"],ex:"The discovery had a profound impact.",tr:"その発見は大きな影響を与えた。"},
- {en:"obstacle",pos:"名詞",ja:"障害、妨げ",syn:["障害","妨げ","障壁","困難"],ex:"Lack of funding is a major obstacle.",tr:"資金不足は大きな障害だ。"},
- {en:"consecutive",pos:"形容詞",ja:"連続した、連続的な",syn:["連続した","連続的な","立て続けの"],ex:"It rained for three consecutive days.",tr:"雨は3日連続で降った。"},
- {en:"reluctant",pos:"形容詞",ja:"気が進まない、渋々の",syn:["気が進まない","渋々の","乗り気でない","嫌がる"],ex:"She was reluctant to admit her mistake.",tr:"彼女は自分の間違いを認めたがらなかった。"},
- {en:"controversial",pos:"形容詞",ja:"論争を呼ぶ、物議を醸す",syn:["論争を呼ぶ","物議を醸す","議論の的となる"],ex:"The proposal remains controversial.",tr:"その提案は依然として議論を呼んでいる。"},
- {en:"implement",pos:"動詞",ja:"実行する、実施する",syn:["実行する","実施する","導入する","履行する"],ex:"The government plans to implement new policies.",tr:"政府は新しい政策を実施する予定だ。"},
+ {en:"alleviate",pos:"動詞",ja:"和らげる、軽減する",syn:["和らげる","軽減する","緩和する","苦痛を減らす","負担を減らす"],ex:"The medicine helped alleviate the pain.",tr:"その薬は痛みを和らげるのに役立った。",level:2},
+ {en:"inevitable",pos:"形容詞",ja:"避けられない、必然的な",syn:["避けられない","必然的な","不可避の","免れない"],ex:"Change is inevitable.",tr:"変化は避けられない。",level:1},
+ {en:"substantial",pos:"形容詞",ja:"かなりの、相当な、実質的な",syn:["かなりの","相当な","実質的な","大幅な"],ex:"The project requires substantial investment.",tr:"その計画にはかなりの投資が必要だ。",level:2},
+ {en:"deteriorate",pos:"動詞",ja:"悪化する、低下する",syn:["悪化する","低下する","劣化する","悪くなる"],ex:"The situation began to deteriorate.",tr:"状況は悪化し始めた。",level:3},
+ {en:"profound",pos:"形容詞",ja:"深い、重大な、深遠な",syn:["深い","重大な","深遠な","大きな影響を与える"],ex:"The discovery had a profound impact.",tr:"その発見は大きな影響を与えた。",level:4},
+ {en:"obstacle",pos:"名詞",ja:"障害、妨げ",syn:["障害","妨げ","障壁","困難"],ex:"Lack of funding is a major obstacle.",tr:"資金不足は大きな障害だ。",level:1},
+ {en:"consecutive",pos:"形容詞",ja:"連続した、連続的な",syn:["連続した","連続的な","立て続けの"],ex:"It rained for three consecutive days.",tr:"雨は3日連続で降った。",level:2},
+ {en:"reluctant",pos:"形容詞",ja:"気が進まない、渋々の",syn:["気が進まない","渋々の","乗り気でない","嫌がる"],ex:"She was reluctant to admit her mistake.",tr:"彼女は自分の間違いを認めたがらなかった。",level:2},
+ {en:"controversial",pos:"形容詞",ja:"論争を呼ぶ、物議を醸す",syn:["論争を呼ぶ","物議を醸す","議論の的となる"],ex:"The proposal remains controversial.",tr:"その提案は依然として議論を呼んでいる。",level:3},
+ {en:"implement",pos:"動詞",ja:"実行する、実施する",syn:["実行する","実施する","導入する","履行する"],ex:"The government plans to implement new policies.",tr:"政府は新しい政策を実施する予定だ。",level:1},
  {"en":"analyze","pos":"動詞","ja":"分析する","syn":["解析する","調べる"],"ex":"The team will analyze its plan.","tr":"そのチームは計画を分析する。","level":1,"icon":"🔎"},
  {"en":"approach","pos":"名詞","ja":"方法/取り組み方","syn":["手法","接近"],"ex":"This approach is important for society.","tr":"この方法は社会にとって重要だ。","level":1,"icon":"🛤️"},
  {"en":"assume","pos":"動詞","ja":"仮定する/思い込む","syn":["想定する","当然と思う"],"ex":"The team will assume its plan.","tr":"そのチームは計画を仮定する。","level":1,"icon":"💭"},
@@ -144,10 +144,10 @@ const words=[
 ];
 const $=s=>document.querySelector(s);
 let mode="cards",index=0,flipped=false,answer="",feedback=null;
-let sortMode="freq", order=[];
+let sortMode="freq", order=[], levelFilter="all";
 const frequencyOrder=[1,2,9,5,7,8,0,3,4,6]; // このサンプル10語の学習優先度の目安
 function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
-function applySort(mode){sortMode=mode;order=mode==="random"?shuffle(words.map((_,i)=>i)):mode==="abc"?words.map((_,i)=>i).sort((a,b)=>words[a].en.localeCompare(words[b].en)): [...frequencyOrder];index=0;flipped=false;answer="";feedback=null;render()}
+function applySort(mode){sortMode=mode;let all=words.map((_,i)=>i);if(mode==="random")all=shuffle(all);else if(mode==="abc")all.sort((a,b)=>words[a].en.localeCompare(words[b].en));else all.sort((a,b)=>(words[a].level||3)-(words[b].level||3)||a-b);order=levelFilter==="all"?all:all.filter(i=>(words[i].level||3)===Number(levelFilter));index=0;flipped=false;answer="";feedback=null;render()}
 function currentIndex(){return order[index]??0}
 let state={known:[],missed:[],studied:[]};
 try{state={...state,...JSON.parse(localStorage.getItem("aqua-vocab-progress")||"{}")}}catch(e){}
