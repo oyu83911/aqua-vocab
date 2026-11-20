@@ -41,23 +41,113 @@ header{display:flex;justify-content:space-between;align-items:center;margin:5px 
 </main>
 <script>
 const words=[
- {en:"alleviate",pos:"動詞",ja:"和らげる、軽減する",syn:["和らげる","軽減する","緩和する","苦痛を減らす","負担を減らす"],ex:"The medicine helped alleviate the pain.",tr:"その薬は痛みを和らげるのに役立った。"},
- {en:"inevitable",pos:"形容詞",ja:"避けられない、必然的な",syn:["避けられない","必然的な","不可避の","免れない"],ex:"Change is inevitable.",tr:"変化は避けられない。"},
- {en:"substantial",pos:"形容詞",ja:"かなりの、相当な、実質的な",syn:["かなりの","相当な","実質的な","大幅な"],ex:"The project requires substantial investment.",tr:"その計画にはかなりの投資が必要だ。"},
- {en:"deteriorate",pos:"動詞",ja:"悪化する、低下する",syn:["悪化する","低下する","劣化する","悪くなる"],ex:"The situation began to deteriorate.",tr:"状況は悪化し始めた。"},
- {en:"profound",pos:"形容詞",ja:"深い、重大な、深遠な",syn:["深い","重大な","深遠な","大きな影響を与える"],ex:"The discovery had a profound impact.",tr:"その発見は大きな影響を与えた。"},
- {en:"obstacle",pos:"名詞",ja:"障害、妨げ",syn:["障害","妨げ","障壁","困難"],ex:"Lack of funding is a major obstacle.",tr:"資金不足は大きな障害だ。"},
- {en:"consecutive",pos:"形容詞",ja:"連続した、連続的な",syn:["連続した","連続的な","立て続けの"],ex:"It rained for three consecutive days.",tr:"雨は3日連続で降った。"},
- {en:"reluctant",pos:"形容詞",ja:"気が進まない、渋々の",syn:["気が進まない","渋々の","乗り気でない","嫌がる"],ex:"She was reluctant to admit her mistake.",tr:"彼女は自分の間違いを認めたがらなかった。"},
- {en:"controversial",pos:"形容詞",ja:"論争を呼ぶ、物議を醸す",syn:["論争を呼ぶ","物議を醸す","議論の的となる"],ex:"The proposal remains controversial.",tr:"その提案は依然として議論を呼んでいる。"},
- {en:"implement",pos:"動詞",ja:"実行する、実施する",syn:["実行する","実施する","導入する","履行する"],ex:"The government plans to implement new policies.",tr:"政府は新しい政策を実施する予定だ。"}
+ {en:"alleviate",pos:"動詞",ja:"和らげる、軽減する",syn:["和らげる","軽減する","緩和する","苦痛を減らす","負担を減らす"],ex:"The medicine helped alleviate the pain.",tr:"その薬は痛みを和らげるのに役立った。",level:2},
+ {en:"inevitable",pos:"形容詞",ja:"避けられない、必然的な",syn:["避けられない","必然的な","不可避の","免れない"],ex:"Change is inevitable.",tr:"変化は避けられない。",level:1},
+ {en:"substantial",pos:"形容詞",ja:"かなりの、相当な、実質的な",syn:["かなりの","相当な","実質的な","大幅な"],ex:"The project requires substantial investment.",tr:"その計画にはかなりの投資が必要だ。",level:2},
+ {en:"deteriorate",pos:"動詞",ja:"悪化する、低下する",syn:["悪化する","低下する","劣化する","悪くなる"],ex:"The situation began to deteriorate.",tr:"状況は悪化し始めた。",level:3},
+ {en:"profound",pos:"形容詞",ja:"深い、重大な、深遠な",syn:["深い","重大な","深遠な","大きな影響を与える"],ex:"The discovery had a profound impact.",tr:"その発見は大きな影響を与えた。",level:4},
+ {en:"obstacle",pos:"名詞",ja:"障害、妨げ",syn:["障害","妨げ","障壁","困難"],ex:"Lack of funding is a major obstacle.",tr:"資金不足は大きな障害だ。",level:1},
+ {en:"consecutive",pos:"形容詞",ja:"連続した、連続的な",syn:["連続した","連続的な","立て続けの"],ex:"It rained for three consecutive days.",tr:"雨は3日連続で降った。",level:2},
+ {en:"reluctant",pos:"形容詞",ja:"気が進まない、渋々の",syn:["気が進まない","渋々の","乗り気でない","嫌がる"],ex:"She was reluctant to admit her mistake.",tr:"彼女は自分の間違いを認めたがらなかった。",level:2},
+ {en:"controversial",pos:"形容詞",ja:"論争を呼ぶ、物議を醸す",syn:["論争を呼ぶ","物議を醸す","議論の的となる"],ex:"The proposal remains controversial.",tr:"その提案は依然として議論を呼んでいる。",level:3},
+ {en:"implement",pos:"動詞",ja:"実行する、実施する",syn:["実行する","実施する","導入する","履行する"],ex:"The government plans to implement new policies.",tr:"政府は新しい政策を実施する予定だ。",level:1},
+ {"en":"analyze","pos":"動詞","ja":"分析する","syn":["解析する","調べる"],"ex":"The team will analyze its plan.","tr":"そのチームは計画を分析する。","level":1,"icon":"🔎"},
+ {"en":"approach","pos":"名詞","ja":"方法/取り組み方","syn":["手法","接近"],"ex":"This approach is important for society.","tr":"この方法は社会にとって重要だ。","level":1,"icon":"🛤️"},
+ {"en":"assume","pos":"動詞","ja":"仮定する/思い込む","syn":["想定する","当然と思う"],"ex":"The team will assume its plan.","tr":"そのチームは計画を仮定する。","level":1,"icon":"💭"},
+ {"en":"benefit","pos":"名詞","ja":"利益/恩恵","syn":["利点","メリット"],"ex":"This benefit is important for society.","tr":"この利益は社会にとって重要だ。","level":1,"icon":"🎁"},
+ {"en":"contribute","pos":"動詞","ja":"貢献する/寄付する","syn":["役立つ","一因となる"],"ex":"The team will contribute its plan.","tr":"そのチームは計画を貢献する。","level":1,"icon":"🤝"},
+ {"en":"decline","pos":"動詞","ja":"減少する/断る","syn":["低下する","衰える"],"ex":"The team will decline its plan.","tr":"そのチームは計画を減少する。","level":1,"icon":"📉"},
+ {"en":"establish","pos":"動詞","ja":"設立する/確立する","syn":["築く","制定する"],"ex":"The team will establish its plan.","tr":"そのチームは計画を設立する。","level":1,"icon":"🏫"},
+ {"en":"evidence","pos":"名詞","ja":"証拠/根拠","syn":["裏付け","証明"],"ex":"This evidence is important for society.","tr":"この証拠は社会にとって重要だ。","level":1,"icon":"🧾"},
+ {"en":"factor","pos":"名詞","ja":"要因/要素","syn":["原因","条件"],"ex":"This factor is important for society.","tr":"この要因は社会にとって重要だ。","level":1,"icon":"🧩"},
+ {"en":"indicate","pos":"動詞","ja":"示す/指し示す","syn":["表す","意味する"],"ex":"The team will indicate its plan.","tr":"そのチームは計画を示す。","level":1,"icon":"👉"},
+ {"en":"influence","pos":"名詞","ja":"影響","syn":["作用","感化"],"ex":"This influence is important for society.","tr":"この影響は社会にとって重要だ。","level":1,"icon":"🌊"},
+ {"en":"issue","pos":"名詞","ja":"問題/論点","syn":["課題","争点"],"ex":"This issue is important for society.","tr":"この問題は社会にとって重要だ。","level":1,"icon":"❗"},
+ {"en":"maintain","pos":"動詞","ja":"維持する/主張する","syn":["保つ","続ける"],"ex":"The team will maintain its plan.","tr":"そのチームは計画を維持する。","level":1,"icon":"⚖️"},
+ {"en":"require","pos":"動詞","ja":"必要とする/要求する","syn":["求める","要する"],"ex":"The team will require its plan.","tr":"そのチームは計画を必要とする。","level":1,"icon":"📌"},
+ {"en":"significant","pos":"形容詞","ja":"重要な/かなりの","syn":["重大な","著しい"],"ex":"The issue is particularly significant.","tr":"その問題は特に重要な。","level":1,"icon":"⭐"},
+ {"en":"achieve","pos":"動詞","ja":"達成する/成し遂げる","syn":["実現する","獲得する"],"ex":"The team will achieve its plan.","tr":"そのチームは計画を達成する。","level":2,"icon":"🏆"},
+ {"en":"affect","pos":"動詞","ja":"影響を及ぼす","syn":["作用する","左右する"],"ex":"The team will affect its plan.","tr":"そのチームは計画を影響を及ぼす。","level":2,"icon":"☀️"},
+ {"en":"appropriate","pos":"形容詞","ja":"適切な/ふさわしい","syn":["妥当な","適当な"],"ex":"The issue is particularly appropriate.","tr":"その問題は特に適切な。","level":2,"icon":"👕"},
+ {"en":"available","pos":"形容詞","ja":"利用できる/入手できる","syn":["使用可能な","空いている"],"ex":"The issue is particularly available.","tr":"その問題は特に利用できる。","level":2,"icon":"📱"},
+ {"en":"capacity","pos":"名詞","ja":"能力/収容力","syn":["容量","最大数"],"ex":"This capacity is important for society.","tr":"この能力は社会にとって重要だ。","level":2,"icon":"🏟️"},
+ {"en":"challenge","pos":"名詞","ja":"課題/挑戦","syn":["難題","試練"],"ex":"This challenge is important for society.","tr":"この課題は社会にとって重要だ。","level":2,"icon":"🧗"},
+ {"en":"circumstance","pos":"名詞","ja":"状況/事情","syn":["環境","境遇"],"ex":"This circumstance is important for society.","tr":"この状況は社会にとって重要だ。","level":2,"icon":"🌦️"},
+ {"en":"communicate","pos":"動詞","ja":"意思を伝える/連絡する","syn":["意思疎通する","伝達する"],"ex":"The team will communicate its plan.","tr":"そのチームは計画を意思を伝える。","level":2,"icon":"💬"},
+ {"en":"complex","pos":"形容詞","ja":"複雑な","syn":["入り組んだ","複合的な"],"ex":"The issue is particularly complex.","tr":"その問題は特に複雑な。","level":2,"icon":"🧶"},
+ {"en":"concern","pos":"名詞","ja":"心配/懸念","syn":["関心事","不安"],"ex":"This concern is important for society.","tr":"この心配は社会にとって重要だ。","level":2,"icon":"💗"},
+ {"en":"consider","pos":"動詞","ja":"考慮する/検討する","syn":["よく考える","みなす"],"ex":"The team will consider its plan.","tr":"そのチームは計画を考慮する。","level":2,"icon":"🤔"},
+ {"en":"contain","pos":"動詞","ja":"含む/中に入れる","syn":["収容する","抑える"],"ex":"The team will contain its plan.","tr":"そのチームは計画を含む。","level":2,"icon":"🫙"},
+ {"en":"create","pos":"動詞","ja":"創造する/作り出す","syn":["生み出す","制作する"],"ex":"The team will create its plan.","tr":"そのチームは計画を創造する。","level":2,"icon":"🎨"},
+ {"en":"demand","pos":"名詞","ja":"需要/要求","syn":["求め","必要性"],"ex":"This demand is important for society.","tr":"この需要は社会にとって重要だ。","level":2,"icon":"📈"},
+ {"en":"develop","pos":"動詞","ja":"発展させる/開発する","syn":["発達する","進展する"],"ex":"The team will develop its plan.","tr":"そのチームは計画を発展させる。","level":2,"icon":"🌱"},
+ {"en":"environment","pos":"名詞","ja":"環境","syn":["周囲","自然環境"],"ex":"This environment is important for society.","tr":"この環境は社会にとって重要だ。","level":2,"icon":"🌳"},
+ {"en":"essential","pos":"形容詞","ja":"不可欠な/必須の","syn":["必要不可欠な","本質的な"],"ex":"The issue is particularly essential.","tr":"その問題は特に不可欠な。","level":2,"icon":"💧"},
+ {"en":"eventually","pos":"副詞","ja":"最終的に/結局は","syn":["やがて","ついには"],"ex":"The situation changed eventually.","tr":"状況は最終的に変化した。","level":2,"icon":"🏁"},
+ {"en":"expand","pos":"動詞","ja":"拡大する/広げる","syn":["拡張する","膨張する"],"ex":"The team will expand its plan.","tr":"そのチームは計画を拡大する。","level":2,"icon":"🎈"},
+ {"en":"identify","pos":"動詞","ja":"特定する/見分ける","syn":["確認する","識別する"],"ex":"The team will identify its plan.","tr":"そのチームは計画を特定する。","level":2,"icon":"🕵️"},
+ {"en":"impact","pos":"名詞","ja":"影響/衝撃","syn":["効果","作用"],"ex":"This impact is important for society.","tr":"この影響は社会にとって重要だ。","level":2,"icon":"💥"},
+ {"en":"occur","pos":"動詞","ja":"起こる/発生する","syn":["生じる","現れる"],"ex":"The team will occur its plan.","tr":"そのチームは計画を起こる。","level":2,"icon":"⚡"},
+ {"en":"participate","pos":"動詞","ja":"参加する","syn":["加わる","関与する"],"ex":"The team will participate its plan.","tr":"そのチームは計画を参加する。","level":3,"icon":"🙋"},
+ {"en":"particular","pos":"形容詞","ja":"特定の/特有の","syn":["個別の","特別な"],"ex":"The issue is particularly particular.","tr":"その問題は特に特定の。","level":3,"icon":"🔍"},
+ {"en":"perform","pos":"動詞","ja":"行う/演じる","syn":["実行する","果たす"],"ex":"The team will perform its plan.","tr":"そのチームは計画を行う。","level":3,"icon":"🎭"},
+ {"en":"period","pos":"名詞","ja":"期間/時代","syn":["時間","時期"],"ex":"This period is important for society.","tr":"この期間は社会にとって重要だ。","level":3,"icon":"🗓️"},
+ {"en":"policy","pos":"名詞","ja":"政策/方針","syn":["施策","規定"],"ex":"This policy is important for society.","tr":"この政策は社会にとって重要だ。","level":3,"icon":"📜"},
+ {"en":"potential","pos":"名詞","ja":"可能性/潜在能力","syn":["将来性","見込み"],"ex":"This potential is important for society.","tr":"この可能性は社会にとって重要だ。","level":3,"icon":"🌟"},
+ {"en":"previous","pos":"形容詞","ja":"前の/以前の","syn":["先行する","直前の"],"ex":"The issue is particularly previous.","tr":"その問題は特に前の。","level":3,"icon":"⏮️"},
+ {"en":"process","pos":"名詞","ja":"過程/手順","syn":["工程","進行"],"ex":"This process is important for society.","tr":"この過程は社会にとって重要だ。","level":3,"icon":"⚙️"},
+ {"en":"provide","pos":"動詞","ja":"提供する/与える","syn":["供給する","備える"],"ex":"The team will provide its plan.","tr":"そのチームは計画を提供する。","level":3,"icon":"📦"},
+ {"en":"publish","pos":"動詞","ja":"出版する/公表する","syn":["発表する","刊行する"],"ex":"The team will publish its plan.","tr":"そのチームは計画を出版する。","level":3,"icon":"📰"},
+ {"en":"reduce","pos":"動詞","ja":"減らす/縮小する","syn":["低下させる","削減する"],"ex":"The team will reduce its plan.","tr":"そのチームは計画を減らす。","level":3,"icon":"➖"},
+ {"en":"reflect","pos":"動詞","ja":"反映する/熟考する","syn":["映し出す","示す"],"ex":"The team will reflect its plan.","tr":"そのチームは計画を反映する。","level":3,"icon":"🪞"},
+ {"en":"region","pos":"名詞","ja":"地域/地方","syn":["区域","地帯"],"ex":"This region is important for society.","tr":"この地域は社会にとって重要だ。","level":3,"icon":"🗺️"},
+ {"en":"relationship","pos":"名詞","ja":"関係/つながり","syn":["人間関係","関連"],"ex":"This relationship is important for society.","tr":"この関係は社会にとって重要だ。","level":3,"icon":"🔗"},
+ {"en":"relevant","pos":"形容詞","ja":"関連のある/適切な","syn":["関係する","妥当な"],"ex":"The issue is particularly relevant.","tr":"その問題は特に関連のある。","level":3,"icon":"🧷"},
+ {"en":"remain","pos":"動詞","ja":"〜のままである/残る","syn":["とどまる","存続する"],"ex":"The team will remain its plan.","tr":"そのチームは計画を〜のままである。","level":3,"icon":"🪨"},
+ {"en":"represent","pos":"動詞","ja":"表す/代表する","syn":["象徴する","示す"],"ex":"The team will represent its plan.","tr":"そのチームは計画を表す。","level":3,"icon":"🕊️"},
+ {"en":"respond","pos":"動詞","ja":"返答する/反応する","syn":["応じる","答える"],"ex":"The team will respond its plan.","tr":"そのチームは計画を返答する。","level":3,"icon":"↩️"},
+ {"en":"responsible","pos":"形容詞","ja":"責任がある/原因である","syn":["責任を負う","担当する"],"ex":"The issue is particularly responsible.","tr":"その問題は特に責任がある。","level":3,"icon":"🧑‍⚖️"},
+ {"en":"result","pos":"名詞","ja":"結果/成果","syn":["結末","成績"],"ex":"This result is important for society.","tr":"この結果は社会にとって重要だ。","level":3,"icon":"🎯"},
+ {"en":"similar","pos":"形容詞","ja":"似ている/同様の","syn":["類似した","共通点のある"],"ex":"The issue is particularly similar.","tr":"その問題は特に似ている。","level":3,"icon":"🪞"},
+ {"en":"source","pos":"名詞","ja":"源/情報源","syn":["出典","供給元"],"ex":"This source is important for society.","tr":"この源は社会にとって重要だ。","level":3,"icon":"⛲"},
+ {"en":"specific","pos":"形容詞","ja":"具体的な/特定の","syn":["明確な","個別の"],"ex":"The issue is particularly specific.","tr":"その問題は特に具体的な。","level":3,"icon":"📍"},
+ {"en":"strategy","pos":"名詞","ja":"戦略/計画","syn":["方策","作戦"],"ex":"This strategy is important for society.","tr":"この戦略は社会にとって重要だ。","level":3,"icon":"♟️"},
+ {"en":"structure","pos":"名詞","ja":"構造/仕組み","syn":["構成","組織"],"ex":"This structure is important for society.","tr":"この構造は社会にとって重要だ。","level":3,"icon":"🏗️"},
+ {"en":"sufficient","pos":"形容詞","ja":"十分な","syn":["足りる","必要なだけの"],"ex":"The issue is particularly sufficient.","tr":"その問題は特に十分な。","level":3,"icon":"🫗"},
+ {"en":"suggest","pos":"動詞","ja":"提案する/示唆する","syn":["勧める","ほのめかす"],"ex":"The team will suggest its plan.","tr":"そのチームは計画を提案する。","level":3,"icon":"💡"},
+ {"en":"support","pos":"動詞","ja":"支える/支持する","syn":["援助する","裏付ける"],"ex":"The team will support its plan.","tr":"そのチームは計画を支える。","level":3,"icon":"🫶"},
+ {"en":"tend","pos":"動詞","ja":"〜する傾向がある","syn":["〜しがちである","世話をする"],"ex":"The team will tend its plan.","tr":"そのチームは計画を〜する傾向がある。","level":3,"icon":"📈"},
+ {"en":"theory","pos":"名詞","ja":"理論/学説","syn":["仮説","考え方"],"ex":"This theory is important for society.","tr":"この理論は社会にとって重要だ。","level":4,"icon":"🧠"},
+ {"en":"tradition","pos":"名詞","ja":"伝統/慣習","syn":["しきたり","風習"],"ex":"This tradition is important for society.","tr":"この伝統は社会にとって重要だ。","level":4,"icon":"🏮"},
+ {"en":"transfer","pos":"動詞","ja":"移す/転送する","syn":["移動させる","転校する"],"ex":"The team will transfer its plan.","tr":"そのチームは計画を移す。","level":4,"icon":"🚚"},
+ {"en":"transform","pos":"動詞","ja":"変える/一変させる","syn":["変形させる","変身させる"],"ex":"The team will transform its plan.","tr":"そのチームは計画を変える。","level":4,"icon":"🦋"},
+ {"en":"transition","pos":"名詞","ja":"移行/変化","syn":["転換","過渡期"],"ex":"This transition is important for society.","tr":"この移行は社会にとって重要だ。","level":4,"icon":"🌉"},
+ {"en":"typical","pos":"形容詞","ja":"典型的な/よくある","syn":["代表的な","ありがちな"],"ex":"The issue is particularly typical.","tr":"その問題は特に典型的な。","level":4,"icon":"📚"},
+ {"en":"unique","pos":"形容詞","ja":"唯一の/独特な","syn":["他にない","独自の"],"ex":"The issue is particularly unique.","tr":"その問題は特に唯一の。","level":4,"icon":"💎"},
+ {"en":"valid","pos":"形容詞","ja":"妥当な/有効な","syn":["正当な","確かな"],"ex":"The issue is particularly valid.","tr":"その問題は特に妥当な。","level":4,"icon":"✅"},
+ {"en":"vary","pos":"動詞","ja":"さまざまである/変化する","syn":["異なる","変動する"],"ex":"The team will vary its plan.","tr":"そのチームは計画をさまざまである。","level":4,"icon":"🎨"},
+ {"en":"vehicle","pos":"名詞","ja":"乗り物/車両","syn":["自動車","輸送手段"],"ex":"This vehicle is important for society.","tr":"この乗り物は社会にとって重要だ。","level":4,"icon":"🚲"},
+ {"en":"version","pos":"名詞","ja":"版/型","syn":["種類","解釈"],"ex":"This version is important for society.","tr":"この版は社会にとって重要だ。","level":4,"icon":"📱"},
+ {"en":"welfare","pos":"名詞","ja":"福祉/幸福","syn":["福利","健康"],"ex":"This welfare is important for society.","tr":"この福祉は社会にとって重要だ。","level":4,"icon":"🏡"},
+ {"en":"whereas","pos":"接続詞","ja":"〜である一方で","syn":["〜に対して","ところが"],"ex":"Some people agree, whereas others disagree.","tr":"賛成する人もいれば、一方で反対する人もいる。","level":4,"icon":"↔️"},
+ {"en":"widespread","pos":"形容詞","ja":"広範囲にわたる/広く普及した","syn":["広まった","一般的な"],"ex":"The issue is particularly widespread.","tr":"その問題は特に広範囲にわたる。","level":4,"icon":"🌐"},
+ {"en":"abandon","pos":"動詞","ja":"捨てる/断念する","syn":["見捨てる","放棄する"],"ex":"The team will abandon its plan.","tr":"そのチームは計画を捨てる。","level":4,"icon":"🧳"},
+ {"en":"accompany","pos":"動詞","ja":"同行する/伴う","syn":["付き添う","同時に起こる"],"ex":"The team will accompany its plan.","tr":"そのチームは計画を同行する。","level":4,"icon":"🚶"},
+ {"en":"accumulate","pos":"動詞","ja":"蓄積する/集める","syn":["積み重なる","ためる"],"ex":"The team will accumulate its plan.","tr":"そのチームは計画を蓄積する。","level":4,"icon":"🪨"},
+ {"en":"accurate","pos":"形容詞","ja":"正確な/的確な","syn":["誤りのない","精密な"],"ex":"The issue is particularly accurate.","tr":"その問題は特に正確な。","level":4,"icon":"🎯"},
+ {"en":"adequate","pos":"形容詞","ja":"十分な/適切な","syn":["足りる","妥当な"],"ex":"The issue is particularly adequate.","tr":"その問題は特に十分な。","level":4,"icon":"🛏️"},
+ {"en":"adjacent","pos":"形容詞","ja":"隣接した/近くの","syn":["隣り合った","隣の"],"ex":"The issue is particularly adjacent.","tr":"その問題は特に隣接した。","level":4,"icon":"🏘️"},
+ {"en":"advocate","pos":"動詞","ja":"提唱する/支持する","syn":["擁護する","主張する"],"ex":"The team will advocate its plan.","tr":"そのチームは計画を提唱する。","level":4,"icon":"📣"},
+ {"en":"allocate","pos":"動詞","ja":"割り当てる/配分する","syn":["振り分ける","分配する"],"ex":"The team will allocate its plan.","tr":"そのチームは計画を割り当てる。","level":4,"icon":"🗂️"},
+ {"en":"alter","pos":"動詞","ja":"変える/変更する","syn":["改める","修正する"],"ex":"The team will alter its plan.","tr":"そのチームは計画を変える。","level":4,"icon":"🔧"},
+ {"en":"anticipate","pos":"動詞","ja":"予想する/期待する","syn":["見越す","予期する"],"ex":"The team will anticipate its plan.","tr":"そのチームは計画を予想する。","level":4,"icon":"🔮"}
 ];
 const $=s=>document.querySelector(s);
 let mode="cards",index=0,flipped=false,answer="",feedback=null;
-let sortMode="freq", order=[];
+let sortMode="freq", order=[], levelFilter="all";
 const frequencyOrder=[1,2,9,5,7,8,0,3,4,6]; // このサンプル10語の学習優先度の目安
 function shuffle(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}
-function applySort(mode){sortMode=mode;order=mode==="random"?shuffle(words.map((_,i)=>i)):mode==="abc"?words.map((_,i)=>i).sort((a,b)=>words[a].en.localeCompare(words[b].en)): [...frequencyOrder];index=0;flipped=false;answer="";feedback=null;render()}
+function applySort(mode){sortMode=mode;let all=words.map((_,i)=>i);if(mode==="random")all=shuffle(all);else if(mode==="abc")all.sort((a,b)=>words[a].en.localeCompare(words[b].en));else all.sort((a,b)=>(words[a].level||3)-(words[b].level||3)||a-b);order=levelFilter==="all"?all:all.filter(i=>(words[i].level||3)===Number(levelFilter));index=0;flipped=false;answer="";feedback=null;render()}
 function currentIndex(){return order[index]??0}
 let state={known:[],missed:[],studied:[]};
 try{state={...state,...JSON.parse(localStorage.getItem("aqua-vocab-progress")||"{}")}}catch(e){}
@@ -66,7 +156,7 @@ function renderStats(){$("#knownCount").textContent=state.known.length;$("#misse
 function setMode(m){mode=m;document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));render()}
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
 function current(){return words[currentIndex()]}
-function sortHTML(){return `<div class="sortbar"><span>並び順</span><button data-sort="freq" class="${sortMode==='freq'?'selected':''}">⭐ 頻出・重要度</button><button data-sort="random" class="${sortMode==='random'?'selected':''}">🔀 ランダム</button><button data-sort="abc" class="${sortMode==='abc'?'selected':''}">ABC順</button></div>`}
+function sortHTML(){return `<div class="sortbar"><span>並び順</span><button data-sort="freq" class="${sortMode==='freq'?'selected':''}">⭐ 優先順</button><button data-sort="random" class="${sortMode==='random'?'selected':''}">🔀 ランダム</button><button data-sort="abc" class="${sortMode==='abc'?'selected':''}">ABC順</button></div><div class="sortbar"><span>レベル</span><button data-level="all" class="${levelFilter==='all'?'selected':''}">すべて</button><button data-level="1" class="${levelFilter==='1'?'selected':''}">① 最重要</button><button data-level="2" class="${levelFilter==='2'?'selected':''}">② 頻出</button><button data-level="3" class="${levelFilter==='3'?'selected':''}">③ 標準</button><button data-level="4" class="${levelFilter==='4'?'selected':''}">④ 発展</button></div>`}
 function visualHTML(w){
  const art={
   alleviate:`<path d="M42 73h56M70 45v56"/><path d="M54 54l32 32M86 54L54 86"/><path d="M112 40c12 9 18 19 18 30a18 18 0 0 1-36 0c0-11 7-21 18-30Z"/><path d="M145 54l7 7 14-17"/>`,
@@ -81,7 +171,7 @@ function visualHTML(w){
   implement:`<circle cx="88" cy="68" r="29"/><circle cx="88" cy="68" r="10"/><path d="M88 29v12m0 54v12M49 68h12m54 0h12M60 40l9 9m38 38 9 9m0-56-9 9M69 87l-9 9"/><path d="m78 68 7 7 15-17"/>`
  };
  const labels={alleviate:'痛み・負担が軽くなる',inevitable:'避けられず起こる',substantial:'量や規模がかなり大きい',deteriorate:'状態が悪くなる',profound:'深く、大きな影響',obstacle:'進むのをさえぎる壁',consecutive:'途切れず連続する',reluctant:'気が進まずためらう',controversial:'賛否が分かれて議論になる',implement:'計画を実行に移す'};
- return `<div class="visual" role="img" aria-label="${labels[w.en]}"><svg viewBox="0 0 190 125" fill="none" stroke="#58aeda" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="95" cy="63" r="57" stroke="#c5eafa" stroke-width="2" stroke-dasharray="4 7"/>${art[w.en]||''}<circle cx="153" cy="24" r="4" fill="#9bdcf5" stroke="none"/><path d="M29 104l4-4m0 4-4-4" stroke="#9bdcf5" stroke-width="3"/></svg></div><div class="visual-caption">✧ ${labels[w.en]} ✧</div>`;
+ return art[w.en]? `<div class="visual" role="img" aria-label="${labels[w.en]||w.ja}"><svg viewBox="0 0 190 125" fill="none" stroke="#58aeda" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="95" cy="63" r="57" stroke="#c5eafa" stroke-width="2" stroke-dasharray="4 7"/>${art[w.en]}<circle cx="153" cy="24" r="4" fill="#9bdcf5" stroke="none"/><path d="M29 104l4-4m0 4-4-4" stroke="#9bdcf5" stroke-width="3"/></svg></div><div class="visual-caption">✧ ${labels[w.en]||w.ja} ✧</div>` : `<div class="visual" role="img" aria-label="${w.ja}"><div style="font-size:54px;filter:drop-shadow(0 3px 2px #b8e3f5)">${w.icon||"✧"}</div></div><div class="visual-caption">✧ ${w.ja} ✧</div>`;
 }
 function cardHTML(){let w=current();return `${sortHTML()}<div class="topline"><span>WORD CARD</span><span>${index+1} / ${order.length}</span></div><div class="card" id="flipCard" role="button" tabindex="0" aria-label="単語カードをめくる">${flipped?`<span class="hint">MEANING ♡</span><div class="meaning">${w.ja}</div>${visualHTML(w)}<div class="pos">${w.en}</div><div class="example">${w.ex}</div><div class="translation">${w.tr}</div>`:`<span class="hint">TAP TO FLIP ✧</span><div class="word">${w.en}</div><div class="pos">${w.pos}</div><span class="hint">タップして意味を確認</span>`}</div><div class="btnrow"><button class="btn" id="prev" ${index===0?"disabled":""}>前へ</button><button class="btn primary" id="flip">${flipped?"表に戻す ↻":"カードをめくる ♡"}</button><button class="btn" id="next">次へ →</button></div>`}
 function quizHTML(){let w=current();return `${sortHTML()}<div class="topline"><span>WRITE THE MEANING ✎</span><span>${index+1} / ${order.length}</span></div><div class="card" style="min-height:150px;cursor:default"><div class="word">${w.en}</div><div class="pos">${w.pos}</div></div><label class="inputlabel" for="answer">この単語の意味を日本語で入力！</label><input id="answer" class="answer" placeholder="意味を入力してね..." autocomplete="off" value="${escapeHTML(answer)}"><div class="btnrow"><button class="btn primary" id="check" ${feedback?"disabled":""}>答え合わせ ♡</button></div>${feedback?`<div class="feedback ${feedback.ok?"good":"bad"}"><strong>${feedback.ok?"○ 正解！！":"× 不正解"}</strong><br>${feedback.ok?"いい感じ！意味を覚えられてるね。":"正しい意味を確認しよう！"}<br><b>${w.ja}</b>${visualHTML(w)}</div><div class="note"><b>例文</b><br>${w.ex}<br><span class="translation">${w.tr}</span></div><div class="btnrow"><button class="btn primary" id="nextQuiz">次の問題へ →</button></div>`:""}`}
@@ -89,6 +179,7 @@ function reviewHTML(){if(!state.missed.length)return `<div class="empty"><div st
 function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){renderStats();$("#content").innerHTML=mode==="cards"?cardHTML():mode==="quiz"?quizHTML():reviewHTML();
  document.querySelectorAll("[data-sort]").forEach(b=>b.onclick=()=>applySort(b.dataset.sort));
+ document.querySelectorAll("[data-level]").forEach(b=>b.onclick=()=>{levelFilter=b.dataset.level;applySort(sortMode)});
  if(mode==="cards"){$("#flipCard").onclick=()=>{flipped=!flipped;render()};$("#flipCard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flipped=!flipped;render()}};$("#flip").onclick=()=>{flipped=!flipped;render()};$("#prev").onclick=()=>{if(index>0){index--;flipped=false;render()}};$("#next").onclick=next}
  if(mode==="quiz"){$("#answer")?.addEventListener("input",e=>answer=e.target.value);$("#check")?.addEventListener("click",check);$("#nextQuiz")?.addEventListener("click",next)}
  if(mode==="review")document.querySelectorAll("[data-review]").forEach(b=>b.onclick=()=>{const id=Number(b.dataset.review);index=order.indexOf(id);if(index<0){applySort("freq");index=order.indexOf(id)}setMode("cards")})
